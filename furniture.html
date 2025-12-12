@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Furniture Products</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link href="assets/css/style.css" rel="stylesheet" />
+        <link
+            rel="shortcut icon"
+            href="assets/img/favicon.ico"
+            type="image/x-icon"
+        />
+        <style>
+            /* General Styles */
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: #f8f9fa;
+            }
+
+            .section-title {
+                position: relative;
+                padding-bottom: 15px;
+                margin-bottom: 40px;
+                font-weight: 700;
+                color: #333;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            /* .section-title::after {
+                content: "";
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 3px;
+                background-color: #0d6efd;
+                /* Adjust color to match your brand */
+            } */
+
+            /* Product Card Styles */
+            .product-card {
+                background: #fff;
+                border: none;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                height: 100%;
+                position: relative;
+                cursor: pointer;
+            }
+
+            .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .card-img-wrapper {
+                height: 250px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .product-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+
+            .product-card:hover img {
+                transform: scale(1.05);
+            }
+
+            .card-body {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .card-title {
+                font-weight: 600;
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+                color: #2c3e50;
+            }
+
+            .card-text {
+                color: #7f8c8d;
+                font-size: 0.9rem;
+            }
+
+            /* SHINE EFFECT CSS */
+            .shine-layer {
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(
+                    to right,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.4) 50%,
+                    rgba(255, 255, 255, 0) 100%
+                );
+                transform: skewX(-25deg);
+                pointer-events: none;
+                z-index: 2;
+            }
+
+            /* Animation Class toggled by JS */
+            .animate-shine {
+                animation: shineMove 1s;
+            }
+
+            @keyframes shineMove {
+                0% {
+                    left: -100%;
+                }
+
+                100% {
+                    left: 200%;
+                }
+            }
+
+            /* Footer Adjustments */
+            .footer-area {
+                background-color: #f8f9fa;
+                /* Light grey footer based on content */
+                padding-top: 50px;
+                border-top: 1px solid #e1e1e1;
+            }
+
+            .footer-bottom {
+                background-color: #222;
+                color: #fff;
+                padding: 15px 0;
+            }
+
+            .footer-bottom a {
+                color: #aaa;
+            }
+
+            .widget-title {
+                color: #fff;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header
+            class="header-area header-default sticky-header bg-white shadow-sm"
+        >
+            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                        <img
+                            src="assets/img/OIS LOGO.png"
+                            alt="OIS Logo"
+                            style="width: 80px"
+                            onerror="this.src='https://via.placeholder.com/80x40?text=LOGO'"
+                        />
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainMenu"
+                        aria-controls="mainMenu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div
+                        class="collapse navbar-collapse justify-content-center"
+                        id="mainMenu"
+                    >
+                        <ul
+                            class="navbar-nav mb-2 mb-lg-0"
+                            style="font-size: 18px; gap: 28px"
+                        >
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="index.html"
+                                    >Home</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="index.html#about-section"
+                                    >About Us</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="electronics.html"
+                                    >Electronics</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="furniture.html"
+                                    >Furniture</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="paper.html"
+                                    >Paper Products</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="contact.html"
+                                    >Contact Us</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container my-5">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title">Home Furniture Collection</h2>
+                </div>
+
+                <div class="col-12">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img src="assets/img/sofa.jpg" alt="Sofa" />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Modern Sofa</h5>
+                                    <p class="card-text">
+                                        Premium fabric comfort for your living
+                                        room.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img src="assets/img/bed.jpg" alt="Bed" />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Luxury Bed</h5>
+                                    <p class="card-text">
+                                        Wooden frame with soft headboard.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="assets/img/centretable.jpeg"
+                                        alt="Centre Table"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Centre Table</h5>
+                                    <p class="card-text">
+                                        Glass top contemporary centretable.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=600&q=80"
+                                        alt="Chest Drawer"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Chest of Drawers</h5>
+                                    <p class="card-text">
+                                        Spacious storage with elegant finish.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=600&q=80"
+                                        alt="Dining Table"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Dining Table</h5>
+                                    <p class="card-text">
+                                        Solid wood family dining set.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="assets/img/tvconsole.jpg"
+                                        alt="TV Console"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">TV Console</h5>
+                                    <p class="card-text">
+                                        Sleek media unit with ample storage.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="assets/img/chairs.webp"
+                                        alt="Designer Chair"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Designer Chair</h5>
+                                    <p class="card-text">
+                                        Ergonomic accent chair for modern homes.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pt-4">
+                <div class="col-12 text-center">
+                    <h2 class="section-title">Office Furniture Collection</h2>
+                </div>
+
+                <div class="col-12">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=600&q=80"
+                                        alt="Office Table"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Executive Office Table
+                                    </h5>
+                                    <p class="card-text">
+                                        Large surface area with cable
+                                        management.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="assets/img/officechair.jpg"
+                                        alt="Office Chair"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Office Chair</h5>
+                                    <p class="card-text">
+                                        High-back mesh chair with lumbar
+                                        support.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="assets/img/workingdesk.webp"
+                                        alt="Working Desk"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Working Desk</h5>
+                                    <p class="card-text">
+                                        Compact desk for workstations.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="assets/img/cabinet.jpg"
+                                        alt="Filing Cabinet"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Filing Cabinet</h5>
+                                    <p class="card-text">
+                                        Secure cabinet for documents.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="assets/img/loungesofa.jpg"
+                                        alt="Lounge Sofa"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Lounge Sofa</h5>
+                                    <p class="card-text">
+                                        Comfortable seating for reception areas.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="assets/img/centre.webp"
+                                        alt="Centre Table"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Centre Table</h5>
+                                    <p class="card-text">
+                                        Minimalist table for office lounges.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card product-card shadow-sm">
+                                <div class="shine-layer"></div>
+                                <div class="card-img-wrapper">
+                                    <img
+                                        src="assets/img/sidetable.webp"
+                                        alt="Side Table"
+                                    />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Side Table</h5>
+                                    <p class="card-text">
+                                        Utility table for corners and sides.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer-area">
+            <div class="footer-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="widget-item">
+                                <img
+                                    src="assets/img/OIS LOGO.png"
+                                    alt="Company Logo"
+                                    style="width: 150px; margin-bottom: 15px"
+                                    onerror="this.src='https://via.placeholder.com/130x60?text=LOGO'"
+                                />
+
+                                <h4
+                                    class="widget-title"
+                                    style="margin-bottom: 15px"
+                                >
+                                    About Us
+                                </h4>
+
+                                <div class="about-widget">
+                                    <p>
+                                        Delivering premium quality, smart
+                                        design, and complete customer
+                                        satisfaction.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                            <div class="widget-item">
+                                <h4
+                                    class="widget-title"
+                                    style="margin-bottom: 15px"
+                                >
+                                    Quick Links
+                                </h4>
+                                <nav class="widget-menu-wrap">
+                                    <ul class="nav-menu nav list-unstyled">
+                                        <li>
+                                            <a
+                                                href="index.html#about-section"
+                                                class="text-decoration-none text-reset"
+                                                >About Us</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="electronics.html"
+                                                class="text-decoration-none text-reset"
+                                                >Electronics</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="furniture.html"
+                                                class="text-decoration-none text-reset"
+                                                >Furniture</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="paper.html"
+                                                class="text-decoration-none text-reset"
+                                                >Paper Products</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="contact.html"
+                                                class="text-decoration-none text-reset"
+                                                >Contact Us</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <div class="widget-item">
+                                <h4
+                                    class="widget-title"
+                                    style="margin-bottom: 15px"
+                                >
+                                    Contact Us
+                                </h4>
+
+                                <div class="align-items-start flex-wrap">
+                                    <div>
+                                        <ul
+                                            class="widget-contact-info list-unstyled mb-0"
+                                        >
+                                            <li class="mb-1">
+                                                <strong
+                                                    >Oximax Infinite Solutionss
+                                                    FZ-LLC</strong
+                                                >
+                                            </li>
+                                            <li class="mb-1">FOB51869</li>
+                                            <li class="mb-1">
+                                                Compass Building, Al Shohada
+                                                Road
+                                            </li>
+                                            <li class="mb-1">
+                                                AL Hamra Industrial Zone-FZ
+                                            </li>
+                                            <li class="mb-3">
+                                                Ras Al Khaimah, United Arab
+                                                Emirates
+                                            </li>
+
+                                            <li class="mb-1">
+                                                Website:
+                                                <a
+                                                    href="https://www.ois-uae.com"
+                                                    target="_blank"
+                                                    class="text-reset"
+                                                    >www.ois-uae.com</a
+                                                >
+                                            </li>
+                                            <li class="mb-1">
+                                                Email: ois.oximax@gmail.com
+                                            </li>
+                                            <li class="mb-1">
+                                                Mobile: +971 588402191
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div
+                                        class="d-flex align-items-center align-items-center mt-3"
+                                        style="gap: 10px"
+                                    >
+                                        <img
+                                            src="assets/img/qrcode/1.png"
+                                            alt="QR Code 1"
+                                            style="width: 160px; height: auto"
+                                        />
+                                        <img
+                                            src="assets/img/qrcode/2.png"
+                                            alt="QR Code 2"
+                                            style="width: 160px; height: auto"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="footer-bottom-content">
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <div class="widget-copyright text-center">
+                                    <p>
+                                        © 2025
+                                        <span>Oximax Infinite Solutions</span>.
+                                        by
+                                        <a
+                                            target="_blank"
+                                            href="https://rvnetworking.com"
+                                            >RV Networking</a
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const cards = document.querySelectorAll(
+                    ".product-card .shine-layer"
+                );
+
+                // Function to add shine randomly to cards
+                function triggerRandomShine() {
+                    // Pick a random card
+                    const randomIndex = Math.floor(
+                        Math.random() * cards.length
+                    );
+                    const shineElement = cards[randomIndex];
+
+                    // Add the animation class
+                    shineElement.classList.add("animate-shine");
+
+                    // Remove the class after animation completes (1s) so it can run again
+                    setTimeout(() => {
+                        shineElement.classList.remove("animate-shine");
+                    }, 1000);
+                }
+
+                // Run the shine effect every 2 seconds
+                setInterval(triggerRandomShine, 2000);
+
+                // Also trigger shine on hover using JS (per request)
+                const productCards = document.querySelectorAll(".product-card");
+                productCards.forEach((card) => {
+                    card.addEventListener("mouseenter", () => {
+                        const shine = card.querySelector(".shine-layer");
+                        shine.classList.remove("animate-shine"); // Reset if currently active
+                        void card.offsetWidth; // Trigger reflow
+                        shine.classList.add("animate-shine");
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

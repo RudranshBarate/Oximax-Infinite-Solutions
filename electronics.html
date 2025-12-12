@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Electronics Products</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link href="assets/css/style.css" rel="stylesheet" />
+        <link
+            rel="shortcut icon"
+            href="assets/img/favicon.ico"
+            type="image/x-icon"
+        />
+        <style>
+            /* General Page Styling */
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: #f8f9fa;
+            }
+
+            /* --- Product Card Styling --- */
+            .products-section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                text-align: center;
+                margin-bottom: 50px;
+                font-weight: 700;
+                color: #333;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .product-card {
+                background: #fff;
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                position: relative;
+                height: 100%;
+                border: 1px solid #eee;
+                /* Necessary for the JS Shine positioning */
+                z-index: 1;
+            }
+
+            .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Image Container */
+            .card-img-wrapper {
+                height: 250px;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #fff;
+            }
+
+            .card-img-wrapper img {
+                max-height: 100%;
+                max-width: 100%;
+                object-fit: contain;
+                transition: transform 0.3s ease;
+            }
+
+            .product-card:hover .card-img-wrapper img {
+                transform: scale(1.05);
+            }
+
+            /* Card Content */
+            .card-body-custom {
+                padding: 20px;
+                text-align: center;
+                background-color: #fff;
+                border-top: 1px solid #f1f1f1;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+                color: #2c3e50;
+            }
+
+            .card-category {
+                font-size: 0.9rem;
+                color: #7f8c8d;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+            }
+
+            .btn-custom {
+                background-color: #2c3e50;
+                color: white;
+                padding: 8px 25px;
+                border-radius: 25px;
+                text-decoration: none;
+                transition: background 0.3s;
+                display: inline-block;
+            }
+
+            .btn-custom:hover {
+                background-color: #000;
+                color: #fff;
+            }
+
+            /* --- THE JS SHINE EFFECT CSS --- */
+            /* This overlay is controlled by JS variables --x and --y */
+            .shine-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(
+                    800px circle at var(--x) var(--y),
+                    rgba(255, 255, 255, 0.6),
+                    transparent 40%
+                );
+                opacity: 0;
+                /* Hidden by default */
+                pointer-events: none;
+                /* Let clicks pass through */
+                z-index: 5;
+                transition: opacity 0.2s;
+                mix-blend-mode: soft-light;
+                /* Blends nicely with the image */
+            }
+
+            .product-card:hover .shine-overlay {
+                opacity: 1;
+                /* Show on hover */
+            }
+
+            /* Header Fixes for provided code */
+            .navbar-brand img {
+                max-width: 100%;
+            }
+
+            .footer-area {
+                background-color: #f8f9fa;
+                /* Light grey footer based on content */
+                padding-top: 50px;
+                border-top: 1px solid #e1e1e1;
+            }
+
+            .footer-bottom {
+                background-color: #222;
+                color: #fff;
+                padding: 15px 0;
+            }
+
+            .footer-bottom a {
+                color: #aaa;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header
+            class="header-area header-default sticky-header bg-white shadow-sm"
+        >
+            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                        <img
+                            src="assets/img/OIS LOGO.png"
+                            alt="OIS Logo"
+                            style="width: 80px"
+                            onerror="this.src='https://via.placeholder.com/80x40?text=LOGO'"
+                        />
+                    </a>
+
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainMenu"
+                        aria-controls="mainMenu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div
+                        class="collapse navbar-collapse justify-content-center"
+                        id="mainMenu"
+                    >
+                        <ul
+                            class="navbar-nav mb-2 mb-lg-0"
+                            style="font-size: 18px; gap: 28px"
+                        >
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="index.html"
+                                    >Home</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="index.html#about-section"
+                                    >About Us</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="electronics.html"
+                                    >Electronics</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="furniture.html"
+                                    >Furniture</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="paper.html"
+                                    >Paper Products</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    style="color: #000"
+                                    href="contact.html"
+                                    >Contact Us</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="products-section">
+            <div class="container">
+                <h2 class="section-title">Electronic Products We Deal In</h2>
+
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/speaker.png"
+                                    alt="Party Speaker"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">Audio System</div>
+                                <h3 class="card-title">Speakers</h3>
+                                <!-- <p class="text-muted">
+                                    8"x2 Woofer with LED Lights
+                                </p> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/fridge.png"
+                                    alt="Refrigerator"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">Home Appliances</div>
+                                <h3 class="card-title">Refrigerator</h3>
+                                <p class="text-muted">
+                                    High Efficiency Cooling
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/freezer.jpg"
+                                    alt="Chest Freezer"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">
+                                    Commercial Cooling
+                                </div>
+                                <h3 class="card-title">Deep Chest Freezer</h3>
+                                <p class="text-muted">
+                                    Faster Cooling & Eco Friendly
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/washingmachine.jpg"
+                                    alt="Washing Machine"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">Home Laundry</div>
+                                <h3 class="card-title">Washing Machine</h3>
+                                <!-- <p class="text-muted">Top Load Twin Tub</p> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/oven.avif"
+                                    alt="Cooking Range"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">
+                                    Kitchen Appliances
+                                </div>
+                                <h3 class="card-title">Free Standing Oven</h3>
+                                <!-- <p class="text-muted">4-Burner Gas Range</p> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/aircooler.jpg"
+                                    alt="Air Cooler"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">Climate Control</div>
+                                <h3 class="card-title">
+                                    Air Conditioner/Aircon
+                                </h3>
+                                <!-- <p class="text-muted">Portable Cooling Unit</p> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/ledtv.jpg"
+                                    alt="LED TV"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">Entertainment</div>
+                                <h3 class="card-title">TV</h3>
+                                <p class="text-muted">
+                                    LED/LCD/Smart/Frameless
+                                </p>
+                                <!-- <p class="text-muted">4K Ultra HD Display</p> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/fan.JPG"
+                                    alt="Split AC"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">Climate Control</div>
+                                <h3 class="card-title">Fan</h3>
+                                <p class="text-muted">
+                                    Super Cool & Silent Mode
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/gasstove.jpg"
+                                    alt="Gas Stove"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">
+                                    Kitchen Appliances
+                                </div>
+                                <h3 class="card-title">Gas / Stove / Double Gas Burner</h3>
+                                <p class="text-muted">
+                                    2-Burner Premium Finish
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="product-card" data-shine>
+                            <div class="shine-overlay"></div>
+                            <div class="card-img-wrapper">
+                                <img
+                                    src="assets/img/products/dispenser.jpg"
+                                    alt="Split AC"
+                                />
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="card-category">Kitchen Appliances</div>
+                                <h3 class="card-title">Water Dispenser</h3>
+                               
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer-area">
+            <div class="footer-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="widget-item">
+                                <img
+                                    src="assets/img/OIS LOGO.png"
+                                    alt="Company Logo"
+                                    style="width: 150px; margin-bottom: 15px"
+                                    onerror="this.src='https://via.placeholder.com/130x60?text=LOGO'"
+                                />
+
+                                <h4
+                                    class="widget-title"
+                                    style="margin-bottom: 15px"
+                                >
+                                    About Us
+                                </h4>
+
+                                <div class="about-widget">
+                                    <p>
+                                        Delivering premium quality, smart
+                                        design, and complete customer
+                                        satisfaction.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                            <div class="widget-item">
+                                <h4
+                                    class="widget-title"
+                                    style="margin-bottom: 15px"
+                                >
+                                    Quick Links
+                                </h4>
+                                <nav class="widget-menu-wrap">
+                                    <ul class="nav-menu nav list-unstyled">
+                                        <li>
+                                            <a
+                                                href="index.html#about-section"
+                                                class="text-decoration-none text-reset"
+                                                >About Us</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="electronics.html"
+                                                class="text-decoration-none text-reset"
+                                                >Electronics</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="furniture.html"
+                                                class="text-decoration-none text-reset"
+                                                >Furniture</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="paper.html"
+                                                class="text-decoration-none text-reset"
+                                                >Paper Products</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="contact.html"
+                                                class="text-decoration-none text-reset"
+                                                >Contact Us</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <div class="widget-item">
+                                <h4
+                                    class="widget-title"
+                                    style="margin-bottom: 15px"
+                                >
+                                    Contact Us
+                                </h4>
+
+                                <div class="align-items-start flex-wrap">
+                                    <div>
+                                        <ul
+                                            class="widget-contact-info list-unstyled mb-0"
+                                        >
+                                            <li class="mb-1">
+                                                <strong
+                                                    >Oximax Infinite Solutionss
+                                                    FZ-LLC</strong
+                                                >
+                                            </li>
+                                            <li class="mb-1">FOB51869</li>
+                                            <li class="mb-1">
+                                                Compass Building, Al Shohada
+                                                Road
+                                            </li>
+                                            <li class="mb-1">
+                                                AL Hamra Industrial Zone-FZ
+                                            </li>
+                                            <li class="mb-3">
+                                                Ras Al Khaimah, United Arab
+                                                Emirates
+                                            </li>
+
+                                            <li class="mb-1">
+                                                Website:
+                                                <a
+                                                    href="https://www.ois-uae.com"
+                                                    target="_blank"
+                                                    class="text-reset"
+                                                    >www.ois-uae.com</a
+                                                >
+                                            </li>
+                                            <li class="mb-1">
+                                                Email: ois.oximax@gmail.com
+                                            </li>
+                                            <li class="mb-1">
+                                                Mobile: +971 588402191
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div
+                                        class="d-flex align-items-center align-items-center mt-3"
+                                        style="gap: 10px"
+                                    >
+                                        <img
+                                            src="assets/img/qrcode/1.png"
+                                            alt="QR Code 1"
+                                            style="width: 160px; height: auto"
+                                        />
+                                        <img
+                                            src="assets/img/qrcode/2.png"
+                                            alt="QR Code 2"
+                                            style="width: 160px; height: auto"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="footer-bottom-content">
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <div class="widget-copyright text-center">
+                                    <p>
+                                        © 2025
+                                        <span>Oximax Infinite Solutions</span>.
+                                        by
+                                        <a
+                                            target="_blank"
+                                            href="https://rvnetworking.com"
+                                            >RV Networking</a
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const cards = document.querySelectorAll(
+                    ".product-card[data-shine]"
+                );
+
+                cards.forEach((card) => {
+                    card.addEventListener("mousemove", (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        // Set CSS variables for the exact cursor position within the card
+                        card.style.setProperty("--x", `${x}px`);
+                        card.style.setProperty("--y", `${y}px`);
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
